@@ -41,7 +41,7 @@ export default function QuoteSection() {
     >
       <div className="max-w-7xl mx-auto px-7 lg:px-10">
         {/* Top row with image */}
-        <div className="grid lg:grid-cols-2 gap-10">
+        <div className="">
           <div ref={imgRef} className="relative h-[430px] w-[80%]">
             <Image
               src={quoteImg}
