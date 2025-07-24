@@ -5,36 +5,37 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+// Content taken from your document
 const programs = [
   {
-    title: "Primary Care",
+    title: "Website Design That Converts",
     description:
-      "Our primary care program emphasizes preventive care, routine check-ups, and early intervention to keep you healthy and address any health concerns proactively.",
+      "Built over 100+ dental websites – mobile-first, SEO-ready, lightning-fast. Integrated with online booking, reviews, WhatsApp & Google Maps.",
   },
   {
-    title: "Specialty Care",
+    title: "Local SEO That Delivers",
     description:
-      "Our specialty care services cover a wide range of medical specialties, ensuring that you receive expert care tailored to your specific health needs.",
+      "Appear in the Top 3 on Google Maps within 90 days and get found for searches like “emergency dentist London” or “Invisalign near me”.",
   },
   {
-    title: "Emergency Care",
+    title: "Google Ads & Meta Campaigns",
     description:
-      "In emergencies, our dedicated team is available 24/7 to provide urgent medical attention and care when you need it most.",
+      "3.2x average ROI from ad campaigns, generating 30–70 new patient enquiries per month through PPC.",
   },
   {
-    title: "Mental Health Support",
+    title: "Performance Reporting",
     description:
-      "We offer comprehensive mental health support services to address emotional well-being, providing counseling, therapy, and support for mental health challenges.",
+      "Monthly reports showing traffic, calls and bookings with 100% measurable ROI.",
   },
   {
-    title: "Wellness Programs",
+    title: "Affordable Packages",
     description:
-      "Our wellness programs focus on holistic health, offering fitness classes, nutritional guidance, and lifestyle coaching to promote overall well-being.",
+      "Plans starting from just £199/month with 24–48 hour turnaround on content and updates.",
   },
   {
-    title: "Maternal Care",
+    title: "Compliance & Real-Time Support",
     description:
-      "Our maternal care program provides comprehensive care for expectant mothers, including prenatal care, childbirth support, and postpartum services to ensure a healthy pregnancy and delivery.",
+      "Full UK data/GDPR compliance plus real-time support via our UK number.",
   },
 ];
 
@@ -80,16 +81,13 @@ export default function ProgramsSection() {
         </div>
       </div>
 
-      {/* Curved white separator */}
       <div className="absolute bottom-0 left-0 w-full pointer-events-none">
         <svg
           viewBox="0 0 1440 160"
           xmlns="http://www.w3.org/2000/svg"
           className="w-full h-[160px]"
           preserveAspectRatio="none"
-        >
-          {/* <path fill="#ffffff" d="M0 80 Q720 160 1440 80 L1440 160 0 160Z" /> */}
-        </svg>
+        />
       </div>
     </section>
   );

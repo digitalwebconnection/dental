@@ -5,13 +5,14 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+// Updated content from the document
 const benefits = [
-  { title: "Innovation", icon: InnovationIcon },
-  { title: "Compassion", icon: CompassionIcon },
-  { title: "Expertise", icon: ExpertiseIcon },
-  { title: "Personalized Care", icon: GlobeIcon },
-  { title: "Quality Assurance", icon: QualityIcon },
-  { title: "Collaborative Approach", icon: DiamondIcon },
+  { title: "7+ Years Experience", icon: InnovationIcon },
+  { title: "Real-Time UK Support", icon: CompassionIcon },
+  { title: "Affordable from £199/mo", icon: ExpertiseIcon },
+  { title: "24–48h Turnaround", icon: GlobeIcon },
+  { title: "GDPR-Compliant", icon: QualityIcon },
+  { title: "1,200+ Leads Generated (2024)", icon: DiamondIcon },
 ];
 
 export default function BenefitsSection() {
@@ -19,20 +20,23 @@ export default function BenefitsSection() {
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-    const ctx = gsap.context(() => {
-      gsap.from(".benefit-item", {
-        opacity: 0,
-        y: 30,
-        duration: 0.6,
-        stagger: 0.15,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-          once: true,
-        },
-      });
-    }, sectionRef);
+    const ctx = gsap.context(
+      () => {
+        gsap.from(".benefit-item", {
+          opacity: 0,
+          y: 30,
+          duration: 0.6,
+          stagger: 0.15,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+            once: true,
+          },
+        });
+      },
+      sectionRef
+    );
     return () => ctx.revert();
   }, []);
 
@@ -97,7 +101,7 @@ export default function BenefitsSection() {
   );
 }
 
-/* ---------- Icons ---------- */
+/* ---------- Icons (unchanged) ---------- */
 function baseIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg

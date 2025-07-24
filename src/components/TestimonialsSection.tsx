@@ -5,23 +5,23 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import topImg from "../../public/image2.png"; // replace with your image
+import topImg from "../../public/image2.png"; // use your banner image
 
 const testimonials = [
   {
     quote:
-      '"Seves has truly transformed my healthcare experience. The personalized care and attention to detail have made a significant difference in my well-being."',
-    author: "John Doe",
+      "“We went from 12 to 50+ new enquiries per month — and our GMB is now ranked #1.”",
+    author: "Dr. Ria Patel, SmileBright Dental",
   },
   {
     quote:
-      '"I highly recommend Seves for their exceptional healthcare services. The team goes above and beyond to ensure patient satisfaction and quality care."',
-    author: "Jane Smith",
+      "“Their team redesigned our old site, ran ads, and within 8 weeks we saw a 212 % traffic boost.”",
+    author: "Dr. James Hunt, Bayswater Dental",
   },
   {
     quote:
-      '"Seves provides top-notch medical care with a compassionate approach. I have always felt valued and supported during my visits."',
-    author: "David Brown",
+      "“1,200+ patient leads generated in 2024 and a 3.5× conversion-rate lift — the numbers speak for themselves.”",
+    author: "2024 Performance Report",
   },
 ];
 
@@ -53,7 +53,7 @@ export default function TestimonialsSection() {
       <div className="w-full h-[340px] lg:h-[660px] relative border-y-4 border-[#1d2d74]">
         <Image
           src={topImg}
-          alt="Testimonials"
+          alt="Client success banner"
           fill
           priority
           className="object-cover"

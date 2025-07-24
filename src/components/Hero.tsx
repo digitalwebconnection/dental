@@ -16,14 +16,14 @@ export default function Hero() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      // Timeline for text
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 70%",
-          once: true,
-        },
-      })
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 70%",
+            once: true,
+          },
+        })
         .from(headingRef.current, {
           y: 60,
           opacity: 0,
@@ -41,7 +41,6 @@ export default function Hero() {
           "-=0.3"
         );
 
-      // Image animation
       if (imageRef.current) {
         gsap.from(imageRef.current, {
           x: 120,
@@ -63,49 +62,50 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-[#070d23] text-white overflow-hidden min-h-screen flex items-center"
+      className="relative bg-[#070d23] text-white overflow-hidden min-h-screen flex items-center px-5 lg:px-20"
     >
-      {/* Right-side background image */}
-      <div
-        ref={imageRef}
-        className="absolute inset-y-10 right-2 w-[620px] h-[650px] hidden lg:block"
-      >
-        <Image
-          src={heroImg}
-          alt="Healthcare"
-          fill
-          className="object-cover"
-          priority
-        />
-      </div>
-
-      {/* Optional dark overlay */}
+  
       <div className="absolute inset-y-0 right-0 w-1/2 hidden lg:block bg-[#070d23]/10" />
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-8xl mx-auto px-6 lg:px-12">
+      <div className="relative z-10 w-full max-w-8xl mx-auto px-6 lg:px-8">
         <div className="max-w-xl py-24">
           <h1
             ref={headingRef}
             className="font-[Times_New_Roman] leading-tight text-4xl sm:text-5xl lg:text-[68px]"
           >
-            Transforming <br /> Healthcare <br /> Experience for You
+            We Help 50+ Dental Clinics
+            <br /> Get <span className="whitespace-nowrap">3X More</span> Patient Leads
           </h1>
 
           <div ref={contentRef} className="mt-16">
             <h2 className="font-[Times_New_Roman] text-3xl mb-4">
-              Discover Seves Health
+              You Could Too
             </h2>
             <p className="text-sm text-gray-200 leading-relaxed">
-              Welcome to Seves, where we prioritize your health and well-being.
-              Our dedicated team is committed to providing exceptional care and
-              innovative solutions tailored to your needs.
+              Grow your clinic with proven patient‑acquisition strategies,
+              conversion‑focused funnels and marketing automation. Start today
+              and see how quickly we can fill your appointment calendar.
             </p>
             <button className="mt-8 rounded-full bg-white text-[#070d23] px-8 py-3 text-sm font-medium hover:bg-gray-200 transition">
-              Contact Now
+              Book Now
             </button>
           </div>
         </div>
+      </div>
+         {/* Right-side image */}
+      <div
+        ref={imageRef}
+        className=" inset-y-10 right-2 w-[100%] h-[550px] "
+      >
+        <div className="absolute -bottom-6 -left-6 w-full h-full border-2 border-white/20 rounded-2xl pointer-events-none" />
+        <Image
+          src={heroImg}
+          alt="Dental marketing growth"
+          fill
+          className="object-cover rounded-2xl shadow-4xl"
+          priority
+        />
       </div>
     </section>
   );
