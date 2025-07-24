@@ -59,7 +59,7 @@ export default function About() {
 
   return (
     <section ref={sectionRef} className="bg-[#070d23] text-white py-24">
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-12 lg:px-20">
+      <div className="relative z-10 w-full max-w-7xl mx-auto lg:px-20">
         {/* Heading */}
         <h2
           ref={headingRef}
@@ -69,7 +69,7 @@ export default function About() {
         </h2>
 
         {/* Image + Text */}
-        <div className="mt-10 grid lg:grid-cols-[560px_1fr] gap-y-12 lg:gap-x-40 items-start lg:-ml-12">
+        <div className="mt-10 grid lg:grid-cols-[560px_1fr] gap-y-6 lg:gap-x-20 items-start lg:-ml-12">
           {/* Image */}
           <div ref={imageWrapRef} className="relative w-full">
             <div className="w-full h-[340px] md:h-[380px] lg:h-[420px] relative overflow-hidden">
