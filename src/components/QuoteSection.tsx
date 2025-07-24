@@ -58,7 +58,7 @@ export default function QuoteSection() {
         {/* Quote row */}
         <div className="mt-8 grid lg:grid-cols-2 gap-10">
           <div className="hidden lg:block" />
-          <div ref={textRef} className="max-w-2xl">
+          <div ref={textRef} className="max-w-3xl">
             <h3 className="font-[Times_New_Roman] mb-4">Quote</h3>
             <p className="font-[Times_New_Roman] text-xl leading-relaxed">
               At Seves, we believe that good health is the foundation of a happy
