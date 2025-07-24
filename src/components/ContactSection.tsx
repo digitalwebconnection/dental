@@ -38,7 +38,7 @@ export default function ContactSection() {
 
   return (
     <section className="bg-white text-[#0c1324] py-20">
-      <div className="max-w-7xl mx-auto px-6 lg:px-16 grid lg:grid-cols-2 gap-16 items-start">
+      <div className="max-w-7xl mx-auto px-6 lg:px-6 grid lg:grid-cols-2 gap-16 items-start">
         {/* Form */}
         <div>
           <h2 className="font-[Times_New_Roman] text-4xl md:text-5xl mb-10">

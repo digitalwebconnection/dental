@@ -39,20 +39,20 @@ export default function QuoteSection() {
       ref={sectionRef}
       className="relative bg-[#070d23] text-white pt-16 pb-40 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-10 lg:px-16">
+      <div className="max-w-7xl mx-auto px-7 lg:px-10">
         {/* Top row with image */}
         <div className="grid lg:grid-cols-2 gap-10">
-          <div ref={imgRef} className="relative h-[430px]">
+          <div ref={imgRef} className="relative h-[430px] w-[80%]">
             <Image
               src={quoteImg}
               alt="Therapy"
               fill
               priority
-              className="object-cover"
+              className="object-cover "
             />
           </div>
           {/* Empty right side so image stands alone like screenshot */}
-          <div className="hidden lg:block" />
+          {/* <div className="hidden lg:block" /> */}
         </div>
 
         {/* Quote row */}

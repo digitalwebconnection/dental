@@ -84,7 +84,7 @@ export default function About() {
           </div>
 
           {/* Text */}
-          <div ref={textRef} className="max-w-lg lg:pl-24">
+          <div ref={textRef} className="max-w-lg lg:pl-16">
             <p className="text-base leading-relaxed">
               At Seves, we are passionate about delivering high-quality
               healthcare services that make a difference in people&apos;s lives.
