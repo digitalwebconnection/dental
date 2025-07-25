@@ -1,111 +1,138 @@
 "use client";
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import heroImg from "../../public/image1.png";
+import heroImg from "../../public/checklist-business-performance-monitoring-concept-600nw-2503514245.webp";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function Hero() {
-  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const heroRef = useRef<HTMLDivElement | null>(null);
   const headingRef = useRef<HTMLHeadingElement | null>(null);
-  const contentRef = useRef<HTMLDivElement | null>(null);
-  const imageRef = useRef<HTMLDivElement | null>(null);
+  const subRef = useRef<HTMLDivElement | null>(null);
+  const imgRef = useRef<HTMLDivElement | null>(null); 
+  const statsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
     gsap.registerPlugin(ScrollTrigger);
-
     const ctx = gsap.context(() => {
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 70%",
-            once: true,
-          },
-        })
-        .from(headingRef.current, {
-          y: 60,
-          opacity: 0,
-          duration: 0.8,
-          ease: "power3.out",
-        })
+      // Intro animation (no scroll trigger – plays immediately)
+      const tl = gsap.timeline();
+      tl.from(headingRef.current, {
+        y: 60,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      })
         .from(
-          contentRef.current,
+          subRef.current,
+          { y: 30, opacity: 0, duration: 0.6, ease: "power3.out" },
+          "-=0.3"
+        )
+        .from(
+          imgRef.current,
+          { x: 120, opacity: 0, duration: 0.9, ease: "power3.out" },
+          "-=0.4"
+        )
+        .from(
+          statsRef.current ? statsRef.current.querySelectorAll(".stat-chip") : [],
           {
-            y: 40,
+            y: 20,
             opacity: 0,
-            duration: 0.6,
+            stagger: 0.15,
+            duration: 0.5,
             ease: "power3.out",
           },
-          "-=0.3"
+          "-=0.4"
         );
 
-      if (imageRef.current) {
-        gsap.from(imageRef.current, {
-          x: 120,
-          opacity: 0,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 70%",
-            once: true,
-          },
-        });
-      }
-    }, sectionRef);
+      // Floating subtle motion for image & shapes
+      gsap.to(".floaty", {
+        y: 15,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        duration: 3,
+      });
+    }, heroRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
     <section
-      ref={sectionRef}
-      className="relative bg-[#070d23] text-white overflow-hidden min-h-screen flex items-center px-5 lg:px-20"
+      ref={heroRef}
+      className="relative overflow-hidden bg-[#070d23] text-white"
+      id="home"
     >
-  
-      <div className="absolute inset-y-0 right-0 w-1/2 hidden lg:block bg-[#070d23]/10" />
+      {/* Decorative shapes */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-20 -left-20 w-[380px] h-[380px] rounded-full bg-indigo-600/30 blur-3xl floaty" />
+        <div className="absolute bottom-0 right-0 w-[320px] h-[320px] rounded-full bg-cyan-500/30 blur-3xl floaty" />
+      </div>
 
-      {/* Content */}
-      <div className="relative z-10 w-full max-w-8xl mx-auto px-6 lg:px-8">
-        <div className="max-w-xl py-24">
+      <div className="max-w-7xl mx-auto px-6 lg:px-20 pt-36 pb-16 grid lg:grid-cols-2 gap-30 items-center relative">
+        {/* Left */}
+        <div>
           <h1
             ref={headingRef}
-            className="font-[Times_New_Roman] leading-tight text-4xl sm:text-5xl lg:text-[68px]"
+            className="font-[Times_New_Roman] leading-tight text-4xl sm:text-5xl lg:text-[60px]"
           >
-            We Help 50+ Dental Clinics
-            <br /> Get <span className="whitespace-nowrap">3X More</span> Patient Leads
+            We Help 50+ Dental Clinics <br />
+            Get <span className="text-cyan-300">3X More</span> Patient Leads
           </h1>
 
-          <div ref={contentRef} className="mt-16">
-            <h2 className="font-[Times_New_Roman] text-3xl mb-4">
-              You Could Too
-            </h2>
-            <p className="text-sm text-gray-200 leading-relaxed">
-              Grow your clinic with proven patient‑acquisition strategies,
-              conversion‑focused funnels and marketing automation. Start today
-              and see how quickly we can fill your appointment calendar.
-            </p>
-            <button className="mt-8 rounded-full bg-white text-[#070d23] px-8 py-3 text-sm font-medium hover:bg-gray-200 transition">
-              Book Now
-            </button>
+            <div ref={subRef} className="mt-8 max-w-md">
+              <h2 className="font-[Times_New_Roman] text-3xl mb-4">
+                You Could Too
+              </h2>
+              <p className="text-sm text-gray-200 leading-relaxed">
+                Grow your clinic with proven patient‑acquisition strategies,
+                conversion‑focused funnels and marketing automation. Start today
+                and see how quickly we can fill your appointment calendar.
+              </p>
+              <button className="mt-8 rounded-full bg-white text-[#070d23] px-10 py-3 text-sm font-medium hover:bg-gray-200 transition shadow-lg hover:shadow-xl">
+                Book Now
+              </button>
+            </div>
+
+          {/* Floating stats */}
+          <div
+            ref={statsRef}
+            className="mt-12 flex flex-wrap gap-4 text-xs font-medium"
+          >
+            {[
+              { k: "100+ Websites", d: "Built & Optimised" },
+              { k: "3.2x ROI", d: "Average Campaign Return" },
+              { k: "Top 3", d: "Google Maps in 90 Days" },
+            ].map((s) => (
+              <div
+                key={s.k}
+                className="stat-chip rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 px-4 py-3"
+              >
+                <p className="font-[Times_New_Roman] text-base">
+                  {s.k}
+                </p>
+                <p className="text-[10px] tracking-wide text-gray-300">{s.d}</p>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
-         {/* Right-side image */}
-      <div
-        ref={imageRef}
-        className=" inset-y-10 right-2 w-[100%] h-[550px] "
-      >
-        <div className="absolute -bottom-6 -left-6 w-full h-full border-2 border-white/20 rounded-2xl pointer-events-none" />
-        <Image
-          src={heroImg}
-          alt="Dental marketing growth"
-          fill
-          className="object-cover rounded-2xl shadow-4xl"
-          priority
-        />
+
+        {/* Right Image */}
+        <div
+          ref={imgRef}
+          className="relative w-full h-[400px] sm:h-[480px] lg:h-[520px]"
+        >
+          <div className="absolute -bottom-6 -left-6 w-full h-full border-2 border-white/20 rounded-2xl pointer-events-none" />
+          <Image
+            src={heroImg}
+            alt="Dental marketing growth"
+            fill
+            priority
+            className="object-cover rounded-2xl shadow-2xl"
+          />
+          <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-[#070d23]/30 via-transparent to-[#1d2d74]/20" />
+        </div>
       </div>
     </section>
   );

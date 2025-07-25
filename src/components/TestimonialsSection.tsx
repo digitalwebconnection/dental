@@ -5,22 +5,22 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import topImg from "../../public/image2.png"; // use your banner image
+import topImg from "../../public/image2.jpg"; // use your banner image
 
 const testimonials = [
   {
     quote:
-      "“We went from 12 to 50+ new enquiries per month — and our GMB is now ranked #1.”",
+      "We went from 12 to 50+ new enquiries per month — and our GMB is now ranked #1.",
     author: "Dr. Ria Patel, SmileBright Dental",
   },
   {
     quote:
-      "“Their team redesigned our old site, ran ads, and within 8 weeks we saw a 212 % traffic boost.”",
+      "Their team redesigned our old site, ran ads, and within 8 weeks we saw a 212 % traffic boost.",
     author: "Dr. James Hunt, Bayswater Dental",
   },
   {
     quote:
-      "“1,200+ patient leads generated in 2024 and a 3.5× conversion-rate lift — the numbers speak for themselves.”",
+      "1,200+ patient leads generated in 2024 and a 3.5× conversion-rate lift — the numbers speak for themselves.",
     author: "2024 Performance Report",
   },
 ];
@@ -60,18 +60,21 @@ export default function TestimonialsSection() {
         />
       </div>
 
+
       {/* Blue block overlapping image */}
-      <div className="-mt-32 relative z-10 bg-[#1d2d74] text-white px-8 lg:px-16 pt-24 pb-40 overflow-hidden">
+      <div className="-mt-20 relative z-10 bg-[#1d2d74] text-white px-8 lg:px-16 pt-24 pb-40 overflow-hidden">
+        <h2 className="font-[Times_New_Roman] text-4xl md:text-5xl mb-15 text-center">
+          Testimonials
+        </h2>
         <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-12">
+
           {testimonials.map((t, i) => (
             <div
               key={i}
               className={`testimonial-item ${i === 0 ? "lg:pr-8" : ""}`}
             >
               {i === 0 && (
-                <h2 className="font-[Times_New_Roman] text-4xl md:text-5xl mb-8">
-                  Testimonials
-                </h2>
+                <></>
               )}
               <p className="font-[Times_New_Roman] text-lg leading-relaxed mb-6">
                 {t.quote}

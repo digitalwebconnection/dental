@@ -6,12 +6,13 @@ import Link from "next/link";
 import { gsap } from "gsap";
 
 const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/programs", label: "Programs" },
-  { href: "/benefits", label: "Benefits" },
-  { href: "/contact", label: "Contact" },
+  { href: "#home", label: "Home" },
+  { href: "#about", label: "About" },
+  { href: "#programs", label: "Programs" },
+  { href: "#benefits", label: "Benefits" },
+  { href: "#contact", label: "Contact" },
 ];
+
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -99,7 +100,7 @@ export default function Navbar() {
 
           <nav className="flex flex-col items-center gap-6 font-[Times_New_Roman] text-4xl">
             {navLinks.map((link, i) => (
-              <Link
+              <a
                 key={link.href}
                 href={link.href}
                 ref={(el) => {
@@ -109,7 +110,7 @@ export default function Navbar() {
                 className="hover:text-gray-300 transition-colors"
               >
                 {link.label}
-              </Link>
+              </a>
             ))}
           </nav>
         </div>

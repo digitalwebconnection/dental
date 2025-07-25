@@ -36,8 +36,8 @@ export default function ContactSection() {
     console.log(form);
   };
 
-  return (
-    <section className="bg-white text-[#0c1324] py-20">
+  return ( 
+    <section className="bg-white text-[#0c1324] py-20" id="contact">
       <div className="max-w-7xl mx-auto px-6 lg:px-6 grid lg:grid-cols-2 gap-16 items-start">
         {/* Form */}
         <div>
@@ -143,7 +143,7 @@ export default function ContactSection() {
               </label>
               <textarea
                 name="message"
-                rows={4}
+                rows={2}
                 value={form.message}
                 onChange={handleChange}
                 required
@@ -155,7 +155,7 @@ export default function ContactSection() {
             <div>
               <button
                 type="submit"
-                className="w-full sm:w-[440px] rounded-full border border-[#0c1324] py-3 text-sm hover:bg-[#0c1324] hover:text-white transition"
+                className="w-full sm:w-full rounded-full border border-[#0c1324] py-2 text-lg hover:bg-[#0c1324] hover:text-white transition"
               >
                 Submit
               </button>
@@ -164,12 +164,12 @@ export default function ContactSection() {
         </div>
 
         {/* Image */}
-        <div className="w-full h-[420px] relative">
+        <div className="w-full h-full relative ">
           <Image
             src={contactImg}
             alt="Contact"
             fill
-            className="object-cover"
+            className="object-cover rounded-lg"
             priority
           />
         </div>
