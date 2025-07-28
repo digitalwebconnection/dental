@@ -5,7 +5,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 lg:px-16 flex flex-col lg:flex-row justify-between gap-12">
         {/* Left blocks */}
         <div className="space-y-10">
-          <h2 className="font-[Times_New_Roman] text-5xl">Seves</h2>
+          <h2 className="font-[Times_New_Roman] text-5xl">DWC</h2>
 
           <div>
             <h3 className="font-[Times_New_Roman] text-lg mb-2">Contact Us</h3>

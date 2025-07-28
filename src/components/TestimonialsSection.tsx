@@ -85,7 +85,7 @@ export default function TestimonialsSection() {
         </div>
 
         {/* Bottom curved wave */}
-        <div className="absolute bottom-0 left-0 w-full pointer-events-none">
+        {/* <div className="absolute bottom-0 left-0 w-full pointer-events-none">
           <svg
             viewBox="0 0 1440 160"
             xmlns="http://www.w3.org/2000/svg"
@@ -97,7 +97,7 @@ export default function TestimonialsSection() {
               d="M0 80 Q720 160 1440 80 L1440 160 0 160Z"
             />
           </svg>
-        </div>
+        </div> */}
       </div>
     </section>
   );

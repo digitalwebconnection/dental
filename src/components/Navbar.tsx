@@ -1,120 +1,141 @@
-// components/Navbar.tsx
-"use client";
+// components/NavBar.tsx
+'use client';
 
-import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
-import { gsap } from "gsap";
+import { useState, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
+import Image from 'next/image';
+import logo from '../../public/logo (2).png'; // put your asset here
 
-const navLinks = [
-  { href: "#home", label: "Home" },
-  { href: "#about", label: "About" },
-  { href: "#programs", label: "Programs" },
-  { href: "#benefits", label: "Benefits" },
-  { href: "#contact", label: "Contact" },
+const NAV_LINKS = [
+  { href: '#home', label: 'Home' },
+  { href: '#about', label: 'About' },
+  { href: '#programs', label: 'Programs' },
+  { href: '#benefits', label: 'Benefits' },
+  { href: '#contact', label: 'Contact' },
 ];
 
-
-export default function Navbar() {
-  const [open, setOpen] = useState(false);
+export default function NavBar() {
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const overlayRef = useRef<HTMLDivElement | null>(null);
-  const itemsRef = useRef<HTMLAnchorElement[]>([]);
 
+  // Header transparency → solid on scroll
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Prevent body scroll
+  // Prevent background scroll when mobile drawer open
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-  }, [open]);
+    document.body.style.overflow = drawerOpen ? 'hidden' : '';
+  }, [drawerOpen]);
 
-  // Animate menu open
+  // Close drawer on ESC
+  const handleKey = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setDrawerOpen(false);
+    },
+    []
+  );
+
   useEffect(() => {
-    if (open && overlayRef.current) {
-      gsap.set(overlayRef.current, { autoAlpha: 0 });
-      gsap.set(itemsRef.current, { y: 20, autoAlpha: 0 });
-      gsap
-        .timeline()
-        .to(overlayRef.current, { autoAlpha: 1, duration: 0.3, ease: "power2.out" })
-        .to(itemsRef.current, {
-          y: 0,
-          autoAlpha: 1,
-          stagger: 0.12,
-          duration: 0.5,
-          ease: "power3.out",
-        }, "-=0.1");
-    }
-  }, [open]);
+    if (drawerOpen) window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [drawerOpen, handleKey]);
 
   return (
     <>
+      {/* Top bar */}
       <header
-        className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${
-          scrolled ? "bg-[#070d23]/90 backdrop-blur-sm shadow" : "bg-transparent"
+        className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+          scrolled
+            ? 'bg-white/90 shadow backdrop-blur dark:bg-slate-400/90'
+            : 'bg-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto h-16 flex items-center justify-between px-6 lg:px-0">
-          <Link
-            href="/"
-            className="text-white font-[Times_New_Roman] text-3xl tracking-wide select-none"
-          >
-            Seves
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-12">
+          {/* Logo */}
+          <Link href="/" aria-label="Go to homepage">
+            <Image
+              src={logo}
+              priority
+              alt="Site logo"
+              className="h-11 w-auto object-contain"
+            />
           </Link>
 
-          {/* Hamburger */}
+          {/* Desktop navigation */}
+          <nav className="hidden gap-8 md:flex">
+            {NAV_LINKS.map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                className="font-medium text-gray-700 transition-colors hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400"
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Mobile hamburger */}
           <button
-            onClick={() => setOpen(!open)}
-            aria-label="Toggle menu"
-            className="relative w-10 h-10 flex flex-col justify-center items-center group"
+            onClick={() => setDrawerOpen((p) => !p)}
+            aria-label="Toggle navigation menu"
+            className="relative flex h-10 w-10 flex-col items-center justify-center md:hidden"
           >
             <span
-              className={`h-[2px] w-6 bg-white transition-all duration-300 ${
-                open ? "rotate-45 translate-y-[5px]" : ""
+              className={`h-[2px] w-6 bg-current transition-transform duration-300 ${
+                drawerOpen ? 'translate-y-1 rotate-45' : ''
               }`}
             />
             <span
-              className={`h-[2px] w-6 bg-white mt-2 transition-all duration-300 ${
-                open ? "-rotate-45 -translate-y-[5px]" : ""
+              className={`mt-2 h-[2px] w-6 bg-current transition-transform duration-300 ${
+                drawerOpen ? '-translate-y-1 -rotate-45' : ''
               }`}
             />
           </button>
         </div>
       </header>
 
-      {/* Overlay */}
-      {open && (
-        <div
-          ref={overlayRef}
-          className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-gradient-to-br from-[#1d2d74] to-[#070d23]"
-        >
-          <button
-            onClick={() => setOpen(false)}
-            aria-label="Close menu"
-            className="absolute top-6 right-6 text-white text-sm tracking-wide hover:underline"
-          >
-            Close
-          </button>
+      {/* Mobile drawer */}
+      <AnimatePresence>
+        {drawerOpen && (
+          <>
+            {/* Overlay */}
+            <motion.div
+              key="overlay"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={() => setDrawerOpen(false)}
+              className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm md:hidden"
+            />
 
-          <nav className="flex flex-col items-center gap-6 font-[Times_New_Roman] text-4xl">
-            {navLinks.map((link, i) => (
-              <a
-                key={link.href}
-                href={link.href}
-                ref={(el) => {
-                  if (el) itemsRef.current[i] = el;
-                }}
-                onClick={() => setOpen(false)}
-                className="hover:text-gray-300 transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
-        </div>
-      )}
+            {/* Sliding panel */}
+            <motion.nav
+              key="drawer"
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'tween', duration: 0.3 }}
+              className="fixed right-0 top-0 z-50 flex h-full w-72 flex-col gap-6 overflow-y-auto bg-white px-8 py-24 shadow-lg dark:bg-slate-900 md:hidden"
+            >
+              {NAV_LINKS.map(({ href, label }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  onClick={() => setDrawerOpen(false)}
+                  className="text-lg font-semibold text-gray-800 outline-none transition-colors hover:text-blue-600 focus-visible:ring-2 focus-visible:ring-blue-500 dark:text-gray-100 dark:hover:text-blue-400"
+                >
+                  {label}
+                </Link>
+              ))}
+            </motion.nav>
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 }

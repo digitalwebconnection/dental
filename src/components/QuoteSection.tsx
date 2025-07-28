@@ -60,7 +60,7 @@ export default function QuoteSection() {
     <section ref={sectionRef} className="relative overflow-hidden py-32">
       {/* Background layers */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#070d23] via-[#101b38] to-[#1d2d74]" />
+        <div className="absolute inset-0 bg-gradient-to-e from-[#070d23] via-[#101b38] to-[#1d2d74]" />
         <div className="absolute -top-10 left-1/3 w-96 h-96 rounded-full bg-cyan-400/20 blur-3xl" />
         <div className="absolute bottom-0 right-10 w-80 h-80 rounded-full bg-indigo-500/20 blur-3xl" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08),transparent_60%)]" />

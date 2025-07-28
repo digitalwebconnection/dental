@@ -1,40 +1,40 @@
 // components/ProgramsSection.tsx
-"use client";
+'use client';
 
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const programs = [
   {
-    title: "Website Design That Converts",
+    title: 'Website Design That Converts',
     description:
-      "Built over 100+ dental websites – mobile-first, SEO-ready, lightning-fast. Integrated with online booking, reviews, WhatsApp & Google Maps.",
+      'Built over 100+ dental websites – mobile-first, SEO-ready, lightning-fast. Integrated with online booking, reviews, WhatsApp & Google Maps.',
   },
   {
-    title: "Local SEO That Delivers",
+    title: 'Local SEO That Delivers',
     description:
-      "Appear in the Top 3 on Google Maps within 90 days and get found for searches like “emergency dentist London” or “Invisalign near me”.",
+      'Appear in the Top 3 on Google Maps within 90 days and get found for searches like “emergency dentist London” or “Invisalign near me”.',
   },
   {
-    title: "Google Ads & Meta Campaigns",
+    title: 'Google Ads & Meta Campaigns',
     description:
-      "3.2x average ROI from ad campaigns, generating 30–70 new patient enquiries per month through PPC.",
+      '3.2x average ROI from ad campaigns, generating 30–70 new patient enquiries per month through PPC.',
   },
   {
-    title: "Performance Reporting",
+    title: 'Performance Reporting',
     description:
-      "Monthly reports showing traffic, calls and bookings with 100% measurable ROI.",
+      'Monthly reports showing traffic, calls and bookings with 100% measurable ROI.',
   },
   {
-    title: "Affordable Packages",
+    title: 'Affordable Packages',
     description:
-      "Plans starting from just £199/month with 24–48 hour turnaround on content and updates.",
+      'Plans starting from just £199/month with 24–48 hour turnaround on content and updates.',
   },
   {
-    title: "Compliance & Real-Time Support",
+    title: 'Compliance & Real‑Time Support',
     description:
-      "Full UK data/GDPR compliance plus real-time support via our UK number.",
+      'Full UK data/GDPR compliance plus real-time support via our UK number.',
   },
 ];
 
@@ -46,57 +46,66 @@ export default function ProgramsSection() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      // Floating blobs
-      gsap.to(".program-blob", {
-        y: 30,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        duration: 6,
-        stagger: 0.5,
+      // Floating blobs (skip on < 640 px)
+      gsap.matchMedia().add('(min-width: 640px)', () => {
+        gsap.to('.program-blob', {
+          y: 30,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut',
+          duration: 6,
+          stagger: 0.5,
+        });
       });
 
-      // Heading animation
       gsap.from(headingRef.current, {
         opacity: 0,
         y: 40,
         duration: 0.7,
-        ease: "power3.out",
+        ease: 'power3.out',
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 70%",
+          start: 'top 70%',
           once: true,
         },
       });
 
-      // Underline animation
-      gsap.from(".heading-underline", {
+      gsap.from('.heading-underline', {
         scaleX: 0,
-        transformOrigin: "left center",
+        transformOrigin: 'left center',
         duration: 0.6,
-        ease: "power3.out",
+        ease: 'power3.out',
         delay: 0.3,
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 70%",
+          start: 'top 70%',
           once: true,
         },
       });
 
-      // Card animation
-      gsap.from(".program-card", {
-        opacity: 0,
-        y: 50,
-        scale: 1.5,
-        duration: 0.8,
-        ease: "power4.out",
-        stagger: 0.2,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-          once: true,
+      // Card animation — gentler on phones
+      gsap.matchMedia().add(
+        {
+          isMobile: '(max-width: 767px)',
+          isDesktop: '(min-width: 768px)',
         },
-      });
+        (context) => {
+          const { isMobile } = context.conditions as { isMobile: boolean };
+          gsap.from('.program-card', {
+            opacity: 0,
+            y: isMobile ? 30 : 50,
+            scale: isMobile ? 1 : 1.5,
+            duration: 0.8,
+            ease: 'power4.out',
+            stagger: 0.2,
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top 75%',
+              once: true,
+            },
+          });
+        }
+      );
     }, sectionRef);
 
     return () => ctx.revert();
@@ -105,50 +114,49 @@ export default function ProgramsSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative text-white pt-28 pb-40 overflow-hidden"
-      style={{ background: "linear-gradient(180deg,#070d23,#1d2d74)" }}
       id="programs"
+      className="relative overflow-hidden bg-gradient-to-b from-[#070d23] to-[#1d2d74] pt-24 pb-32 text-white sm:pt-28 sm:pb-40"
     >
-      {/* Decorative Blobs */}
+      {/* Decorative blobs (hidden on xs) */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="program-blob absolute top-0 -left-20 w-72 h-72 bg-cyan-400/20 blur-3xl rounded-full" />
-        <div className="program-blob absolute bottom-0 right-0 w-80 h-80 bg-indigo-500/20 blur-3xl rounded-full" />
+        <div className="program-blob absolute -left-16 -top-10 hidden h-64 w-64 rounded-full bg-cyan-400/20 blur-3xl sm:block md:h-72 md:w-72" />
+        <div className="program-blob absolute bottom-0 right-0 hidden h-72 w-72 rounded-full bg-indigo-500/20 blur-3xl sm:block md:h-80 md:w-80" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-16">
-        <div className="mb-14">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-16">
+        {/* Heading */}
+        <div className="mb-12 sm:mb-14">
           <h2
             ref={headingRef}
-            className="font-[Times_New_Roman] text-4xl md:text-5xl lg:text-6xl"
+            className="font-[Times_New_Roman] text-[28px] leading-tight sm:text-4xl md:text-5xl lg:text-6xl"
           >
             Our Specialized Programs
           </h2>
-          <div className="heading-underline mt-2 h-[3px] w-156 bg-white/70 rounded-full" />
+          <div className="heading-underline mt-2 h-[3px] w-40 rounded-full bg-white/70 sm:w-56 md:w-72" />
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+        {/* Cards */}
+        <div className="grid gap-8 sm:gap-10 md:grid-cols-2 lg:grid-cols-3">
           {programs.map((p, i) => (
             <div
               key={p.title}
-              className="program-card group relative p-[1px] rounded-2xl bg-gradient-to-br from-white/20 to-white/0 transform-gpu"
+              className="program-card group relative rounded-2xl p-[1px] bg-gradient-to-br from-white/20 to-white/0"
             >
-              <div className="h-full rounded-2xl bg-white/10 backdrop-blur-sm border border-white/10 p-6 flex flex-col transition duration-300 group-hover:shadow-2xl group-hover:scale-[1.09]">
-                <div className="flex items-start justify-between">
-                  <h3 className="font-[Times_New_Roman] text-2xl mb-3">
+              <div className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/10 p-6 backdrop-blur-sm transition duration-300 group-hover:scale-[1.05] group-hover:shadow-2xl">
+                <div className="mb-3 flex items-start justify-between">
+                  <h3 className="font-[Times_New_Roman] text-xl leading-tight sm:text-2xl">
                     {p.title}
                   </h3>
-                  <span className="text-xs px-3 py-1 rounded-full bg-white/10 border border-white/20">
-                    {String(i + 1).padStart(2, "0")}
+                  <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs">
+                    {String(i + 1).padStart(2, '0')}
                   </span>
                 </div>
-                <p className="text-sm leading-relaxed text-gray-200 flex-1">
+                <p className="flex-1 text-sm leading-relaxed text-gray-200">
                   {p.description}
                 </p>
-                <div className="mt-6">
-                  <span className="text-[11px] uppercase tracking-wide text-gray-300 group-hover:text-white transition-colors">
-                    Learn More →
-                  </span>
-                </div>
+                <span className="mt-6 text-[11px] uppercase tracking-wide text-gray-300 transition-colors group-hover:text-white">
+                  Learn More →
+                </span>
               </div>
             </div>
           ))}

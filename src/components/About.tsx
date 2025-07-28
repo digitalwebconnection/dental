@@ -83,7 +83,7 @@ export default function About() {
       <div className="relative max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-20 items-center">
         {/* Image */}
         <div ref={imgWrapRef} className="relative">
-          <div className="absolute -bottom-6 -left-6 w-full h-full border-2 border-white/20 rounded-2xl pointer-events-none" />
+          <div className="absolute -bottom-6 -left-6 w-full h-full border-2 border-white/80 rounded-2xl pointer-events-none" />
           <div className="relative w-full h-[420px] rounded-2xl overflow-hidden">
             <Image
               src={aboutImg}
@@ -101,7 +101,7 @@ export default function About() {
           ref={cardRef}
           className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-10 border border-white/10 shadow-xl"
         >
-          <h2 className="font-[Times_New_Roman] text-4xl md:text-5xl mb-6">
+          <h2 className="font-[Times_New_Roman] text-3  xl md:text-4xl mb-6">
             Why Dentists Choose Us
           </h2>
           <p className="text-sm leading-relaxed text-gray-200 max-w-lg">
